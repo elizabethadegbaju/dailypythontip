@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+    <style>
+        body {
+            display: flex !important;
+            min-height: 100vh !important;
+            flex-direction: column !important;
+        }
+
+        main {
+            flex: 1 0 auto !important;
+        }
+    </style>
+{% endblock %}
+{% block nav %}
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="{% url 'home:index' %}" class="brand-logo">Daily
+                Python Tip</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                    class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{% url 'home:index' %}">Search</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% if allow_mobile %}
+        <ul class="sidenav" id="mobile-demo">
+            <li><a href="{% url 'home:index' %}">Search</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+{% block footer %}
+    <div class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2021 Daily Python Tip
+                <a class="grey-text text-lighten-4 right"
+                   href="{% url 'home:index' %}">Search</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
