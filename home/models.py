@@ -17,6 +17,9 @@ class Tip(models.Model):
     total_likes = models.IntegerField()
     total_retweets = models.IntegerField()
 
+    def __str__(self):
+        return f'{self.author} - {self.text[:150]}...'
+
 
 class TipLink(models.Model):
     """
@@ -24,3 +27,13 @@ class TipLink(models.Model):
     """
     tip = models.ForeignKey(to=Tip, on_delete=models.CASCADE)
     link = models.TextField()
+
+    def __str__(self):
+        return f'({self.link}) {self.tip}'
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
