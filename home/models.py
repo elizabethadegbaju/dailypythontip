@@ -8,11 +8,12 @@ class Tip(models.Model):
     """
     This represents a single Daily Python Tip
     """
+    tweet_id = models.PositiveBigIntegerField()
     timestamp = models.DateTimeField()
-    tip = models.TextField()
-    link = models.BooleanField(default=False)
+    text = models.TextField()
+    has_link = models.BooleanField(default=False)
     author = models.CharField(max_length=255)
-    published = models.TextField()
+    published = models.BooleanField(default=False)
     total_likes = models.IntegerField()
     total_retweets = models.IntegerField()
 
