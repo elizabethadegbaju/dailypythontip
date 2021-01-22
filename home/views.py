@@ -1,3 +1,6 @@
+from django.contrib.postgres.search import SearchVector, SearchQuery, \
+    SearchRank
+from django.db.models import F
 from django.shortcuts import render
 
 # Create your views here.
@@ -8,7 +11,9 @@ def index(request, template='home/tip_list.html',
           page_template='home/tip_list_page.html'):
     if request.is_ajax():
         template = page_template
-    tips = Tip.objects.all()
+    tips = Tip.objects.all().annotate(
+        popularity=F('total_likes') + F('total_retweets')).order_by(
+        '-popularity')
     tags = Tag.objects.all().order_by('name')
     return render(request, template,
                   {'tips': tips, 'page_template': page_template, 'tags': tags})
@@ -18,12 +23,10 @@ def filter_tag(request, tag, template='home/tip_list.html',
                page_template='home/tip_list_page.html'):
     if request.is_ajax():
         template = page_template
-    # vector = SearchVector('text')
-    # query = SearchQuery(tag)
-    # tips = Tip.objects.annotate(rank=SearchRank(vector, query)).order_by(
-    #     '-rank')
-
-    tips = Tip.objects.filter(text__search=tag)
+    vector = SearchVector('text')
+    query = SearchQuery(tag)
+    tips = Tip.objects.annotate(rank=SearchRank(vector, query)).order_by(
+        '-rank')
     tags = Tag.objects.all().order_by('name')
     return render(request, template,
                   {'tips': tips, 'page_template': page_template, 'tags': tags})

@@ -4,7 +4,11 @@
     <div class="col s12 m4">
         <div class="card small blue-grey darken-1">
             <div class="card-content white-text">
-                <span class="card-title">{{ tip.author }}</span>
+                <span class="card-title">{{ tip.author }}
+                <span class="right"><i class="material-icons">favorite</i>
+                    {{ tip.total_likes }} <i class="material-icons">cached</i>
+                    {{ tip.total_retweets }}
+                </span> </span>
                 <p>{{ tip.text|safe|linebreaks }}</p>
             </div>
             {% if tip.has_link %}
