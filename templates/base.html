@@ -20,10 +20,8 @@
 
     {% endblock %}
 </head>
-<body class="{% block body_class %}
-
-{% endblock %}">
-{% block nav %}
+<body>
+{% block header %}
 {% endblock %}
 
 <main>
@@ -34,11 +32,10 @@
 {% block footer %}
 {% endblock %}
 
-<script src="{% static 'jquery/jquery-3.5.1.min.js' %}"></script>
-<script src="{% static 'materialize/js/materialize.min.js' %}"></script>
-<script src="{% static 'js/init.js' %}"></script>
-
 {% block scripts %}
+    <script src="{% static 'jquery/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
 {% endblock %}
 </body>
 </html>

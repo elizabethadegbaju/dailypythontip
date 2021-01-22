@@ -11,34 +11,94 @@
         main {
             flex: 1 0 auto !important;
         }
+
+        header, main, footer {
+            padding-left: 300px;
+        }
+
+        @media only screen and (max-width: 992px) {
+            header, main, footer {
+                padding-left: 0;
+            }
+        }
     </style>
 {% endblock %}
-{% block nav %}
-    <nav>
-        <div class="nav-wrapper container">
-            <a href="{% url 'home:index' %}" class="brand-logo">Daily
-                Python Tip</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+{% block header %}
+    <header>
+        <nav>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i
                     class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="{% url 'home:index' %}">Search</a></li>
+            <div class="nav-wrapper center-align">
+                <a class="page-title">Daily Python Tip</a>
+            </div>
+        </nav>
+    </header>
+
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <li>
+            <div class="user-view yellow darken-1 center-align">
+                <div>
+                    <img class="circle"
+                         style="margin: auto!important; width: 150px; height: 150px"
+                         src="{% static 'img/logo.jpg' %}">
+                </div>
+                {% if not user.is_authenticated %}
+                    <p><span class="grey-text text-darken-2 name
+                    text-darken-3">Welcome,
+                        Pythonista</span></p>
+                {% else %}
+                    <p><span
+                            class="grey-text text-darken-2 name">Welcome,
+                        {{ user.get_full_name }}</span>
+                    </p>
+                    <p href="#email"><span
+                            class="grey-text text-darken-2 email">
+                    {{ user.email }}</span></p>
+                    {#                    <a href="{% url 'logout' %}">Sign out</a>#}
+                {% endif %}
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">home</i>Home </a></li>
+        <li><a href="#!"><i class="material-icons">today</i>Tip of the
+            day
+        </a></li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header"><i
+                            class="material-icons">filter_alt</i>Categories<i
+                            class="material-icons right">expand_more</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            {% for tag in tags %}
+                                <li>
+                                    <a href="{% url 'home:filter-tag' tag.name %}">{{ tag.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
             </ul>
-        </div>
-    </nav>
-    {% if allow_mobile %}
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="{% url 'home:index' %}">Search</a></li>
-        </ul>
-    {% endif %}
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Sort Tweets by:</a></li>
+        <li><a class="waves-effect" href="#!"><i
+                class="material-icons">favorite</i>Twitter
+            Likes</a></li>
+        <li><a class="waves-effect" href="#!"><i
+                class="material-icons">cached</i>Twitter Retweets</a></li>
+    </ul>
 {% endblock %}
 {% block footer %}
-    <div class="page-footer">
+    <footer class="page-footer">
         <div class="footer-copyright">
-            <div class="container">
+            <div>
                 © 2021 Daily Python Tip
-                <a class="grey-text text-lighten-4 right"
-                   href="{% url 'home:index' %}">Search</a>
+                <a class="grey-text text-lighten-4 "
+                   href="{% url 'home:index' %}">Browse</a>
             </div>
         </div>
-    </div>
+    </footer>
 {% endblock %}
