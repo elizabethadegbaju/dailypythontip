@@ -1,0 +1,41 @@
+{% load el_pagination_tags %}
+{% lazy_paginate tips %}
+{% for tip in tips %}
+    <div class="col s12 m4">
+        <div class="card small blue-grey darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">{{ tip.author }}</span>
+                <p>{{ tip.text|safe|linebreaks }}</p>
+            </div>
+            {% if tip.has_link %}
+                <div class="card-action">
+                    {% for tiplink in tip.tiplink_set.all %}
+                        <a href="{{ tiplink.link|safe }}" target="_blank"
+                        >{{ tiplink.link|safe }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
+{% show_more %}
+<div class="endless_container">
+    {% if querystring != False %}
+        <a class="endless_more" href="#"
+           data-el-querystring-key="{{ querystring_key }}">Show
+            More</a>
+    {% endif %}
+    <div class="preloader-wrapper active endless_loading" hidden>
+        <div class="spinner-layer">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div>
+            <div class="gap-patch">
+                <div class="circle"></div>
+            </div>
+            <div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</div>

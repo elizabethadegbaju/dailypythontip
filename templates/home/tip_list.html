@@ -1,0 +1,13 @@
+{% extends 'base_nav.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        {% include page_template %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+    <script>$.endlessPaginate({paginateOnScroll: true, queryString: true});
+    </script>
+{% endblock %}

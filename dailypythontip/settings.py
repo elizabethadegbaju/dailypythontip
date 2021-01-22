@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'django_apscheduler',
+    'django.contrib.postgres',
+    'el_pagination',
 ]
 
 SCHEDULER_CONFIG = {
@@ -50,6 +52,9 @@ SCHEDULER_CONFIG = {
     },
 }
 SCHEDULER_AUTOSTART = True
+
+EL_PAGINATION_PAGE_OUT_OF_RANGE_404 = True
+EL_PAGINATION_PER_PAGE = 12
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,8 +71,7 @@ ROOT_URLCONF = 'dailypythontip.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
