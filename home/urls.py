@@ -20,6 +20,7 @@ from home import views
 app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('search/', views.search_tips, name='search-tips'),
     path('<str:tag>/', views.filter_tag, name='filter-tag'),
     path('sort/<str:criteria>/', views.sort_tips, name='sort-tips'),
 ]

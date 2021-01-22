@@ -1,7 +1,7 @@
 {% load el_pagination_tags %}
 {% lazy_paginate tips %}
 {% for tip in tips %}
-    <div class="col s12 m4">
+    <div class="col s12 m6 l4">
         <div class="card small scrolling z-depth-3 yellow lighten-4">
             <div class="card-content grey-text text-darken-2 left-align">
                 <span class="card-title">{{ tip.author }}
@@ -12,9 +12,11 @@
                 <p style="white-space: pre-wrap">{{ tip.text|safe|linebreaksbr }}</p>
             </div>
             {% if tip.has_link %}
-                <div class="card-action center-align">
+                <div class="card-action center-align"
+                     style="background-color: #306998">
                     {% for tiplink in tip.tiplink_set.all %}
-                        <a href="{{ tiplink.link|safe }}" target="_blank"
+                        <a href="{{ tiplink.link|safe }}"
+                           target="_blank"
                         >{{ tiplink.link|safe }}</a>
                     {% endfor %}
                 </div>

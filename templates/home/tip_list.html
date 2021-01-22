@@ -1,13 +1,52 @@
 {% extends 'base_nav.html' %}
 {% load static %}
 {% block content %}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <form class="col s12" action="{% url 'home:search-tips' %}"
+                      method="get">
+                    <div class="row">
+                        <div class="input-field inline col s10">
+                            <i class="material-icons prefix">search</i>
+                            <input id="search" name="q" type="text">
+                            <label for="search">Search catalog of all
+                                tips posted by @python_tip</label>
+                        </div>
+                        <div class="input-field inline col s1 offset-s1">
+                            <button
+                                    class="btn waves-effect waves-light
+                            right btn-large" type="submit">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% if not tips %}
+                <div>
+                    <h2 class="grey-text darken-2">No tips found. Try
+                        Again.</h2>
+                </div>
+            {% elif 'q' in request.GET %}
+                <div>
+                    <h2 class="grey-text darken-2">Results for
+                        '{{ request.GET.q }}' sorted by relevance</h2>
+                </div>
+            {% endif %}
+        </div>
+    </div>
     <div class="row">
-        {% include page_template %}
+        <div class="col s10 offset-s1">
+            <div class="row">
+                {% include page_template %}
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block scripts %}
     {{ block.super }}
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
-    <script>$.endlessPaginate({paginateOnScroll: true, queryString: true});
+    <script>$.endlessPaginate({paginateOnScroll: true});
     </script>
 {% endblock %}
