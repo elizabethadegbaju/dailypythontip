@@ -20,6 +20,9 @@ class Tip(models.Model):
     def __str__(self):
         return f'{self.author} - {self.text[:150]}...'
 
+    class Meta:
+        get_latest_by = 'timestamp'
+
 
 class TipLink(models.Model):
     """
