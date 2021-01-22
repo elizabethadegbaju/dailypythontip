@@ -21,4 +21,5 @@ app_name = 'home'
 urlpatterns = [
     path('', views.index, name='index'),
     path('<str:tag>/', views.filter_tag, name='filter-tag'),
+    path('sort/<str:criteria>/', views.sort_tips, name='sort-tips'),
 ]

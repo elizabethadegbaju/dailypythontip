@@ -1,5 +1,3 @@
-from django.contrib.postgres.search import SearchVector, SearchQuery, \
-    SearchRank
 from django.shortcuts import render
 
 # Create your views here.
@@ -29,3 +27,18 @@ def filter_tag(request, tag, template='home/tip_list.html',
     tags = Tag.objects.all().order_by('name')
     return render(request, template,
                   {'tips': tips, 'page_template': page_template, 'tags': tags})
+
+
+def sort_tips(request, criteria, template='home/tip_list.html',
+              page_template='home/tip_list_page.html'):
+    tips = Tip.objects.all()
+    if criteria == 'likes':
+        sorted_tips = tips.order_by('-total_likes')
+    elif criteria == 'retweets':
+        sorted_tips = tips.order_by('-total_retweets')
+    else:
+        sorted_tips = tips
+    tags = Tag.objects.all().order_by('name')
+    return render(request, template,
+                  {'tips': sorted_tips, 'page_template': page_template,
+                   'tags': tags})

@@ -84,10 +84,12 @@
             <div class="divider"></div>
         </li>
         <li><a class="subheader">Sort Tweets by:</a></li>
-        <li><a class="waves-effect" href="#!"><i
+        <li><a class="waves-effect"
+               href="{% url 'home:sort-tips' 'likes' %}"><i
                 class="material-icons">favorite</i>Twitter
             Likes</a></li>
-        <li><a class="waves-effect" href="#!"><i
+        <li><a class="waves-effect"
+               href="{% url 'home:sort-tips' 'retweets' %}"><i
                 class="material-icons">cached</i>Twitter Retweets</a></li>
     </ul>
 {% endblock %}
