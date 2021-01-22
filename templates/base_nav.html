@@ -36,32 +36,33 @@
 
     <ul id="slide-out" class="sidenav sidenav-fixed">
         <li>
-            <div class="user-view yellow darken-1 center-align">
+            <div class="user-view center-align" style="background-color:
+            #306998">
                 <div>
                     <img class="circle"
                          style="margin: auto!important; width: 150px; height: 150px"
                          src="{% static 'img/logo.jpg' %}">
                 </div>
                 {% if not user.is_authenticated %}
-                    <p><span class="grey-text text-darken-2 name
+                    <p><span class="white-text name
                     text-darken-3">Welcome,
                         Pythonista</span></p>
                 {% else %}
                     <p><span
-                            class="grey-text text-darken-2 name">Welcome,
+                            class="white-text name">Welcome,
                         {{ user.get_full_name }}</span>
                     </p>
                     <p href="#email"><span
-                            class="grey-text text-darken-2 email">
+                            class="white-text email">
                     {{ user.email }}</span></p>
-                    {#                    <a href="{% url 'logout' %}">Sign out</a>#}
                 {% endif %}
             </div>
         </li>
-        <li><a href="{% url 'home:index' %}"><i class="material-icons">home</i>Home
+        <li><a class="waves-effect waves-yellow waves-ripple"
+               href="{% url 'home:index' %}"><i class="material-icons">home</i>Home
         </a></li>
-        <li><a href="#!"><i class="material-icons">today</i>Tip of the
-            day
+        <li><a href="#!" class="waves-effect waves-yellow waves-ripple"><i
+                class="material-icons">today</i>Tip of the day
         </a></li>
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
@@ -73,7 +74,8 @@
                         <ul>
                             {% for tag in tags %}
                                 <li>
-                                    <a href="{% url 'home:filter-tag' tag.name %}">{{ tag.name }}</a>
+                                    <a class="waves-effect waves-yellow waves-ripple"
+                                       href="{% url 'home:filter-tag' tag.name %}">{{ tag.name }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
@@ -84,12 +86,12 @@
         <li>
             <div class="divider"></div>
         </li>
-        <li><a class="subheader">Sort Tweets by:</a></li>
-        <li><a class="waves-effect"
+        <li><a class="subheader">Sort all Tweets by:</a></li>
+        <li><a class="waves-effect waves-yellow waves-ripple"
                href="{% url 'home:sort-tips' 'likes' %}"><i
                 class="material-icons">favorite</i>Twitter
             Likes</a></li>
-        <li><a class="waves-effect"
+        <li><a class="waves-effect waves-yellow waves-ripple"
                href="{% url 'home:sort-tips' 'retweets' %}"><i
                 class="material-icons">cached</i>Twitter Retweets</a></li>
     </ul>

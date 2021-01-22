@@ -2,17 +2,17 @@
 {% lazy_paginate tips %}
 {% for tip in tips %}
     <div class="col s12 m4">
-        <div class="card small blue-grey darken-1">
-            <div class="card-content white-text">
+        <div class="card small scrolling z-depth-3 yellow lighten-4">
+            <div class="card-content grey-text text-darken-2 left-align">
                 <span class="card-title">{{ tip.author }}
                 <span class="right"><i class="material-icons">favorite</i>
                     {{ tip.total_likes }} <i class="material-icons">cached</i>
                     {{ tip.total_retweets }}
                 </span> </span>
-                <p>{{ tip.text|safe|linebreaks }}</p>
+                <p style="white-space: pre-wrap">{{ tip.text|safe|linebreaksbr }}</p>
             </div>
             {% if tip.has_link %}
-                <div class="card-action">
+                <div class="card-action center-align">
                     {% for tiplink in tip.tiplink_set.all %}
                         <a href="{{ tiplink.link|safe }}" target="_blank"
                         >{{ tiplink.link|safe }}</a>
@@ -22,24 +22,6 @@
         </div>
     </div>
 {% endfor %}
-{% show_more %}
-<div class="endless_container">
-    {% if querystring != False %}
-        <a class="endless_more" href="#"
-           data-el-querystring-key="{{ querystring_key }}">Show
-            More</a>
-    {% endif %}
-    <div class="preloader-wrapper active endless_loading" hidden>
-        <div class="spinner-layer">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div>
-            <div class="gap-patch">
-                <div class="circle"></div>
-            </div>
-            <div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
-    </div>
+<div class="center-align">
+    {% show_more %}
 </div>
