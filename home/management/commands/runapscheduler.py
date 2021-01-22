@@ -64,7 +64,6 @@ def create_tip(tweet):
                 name=hashtag['text'].lower())
             if created:
                 tag.save()
-            print(f"hashtag: {hashtag['text']}")
     tip, created = Tip.objects.update_or_create(tweet_id=tweet.id,
                                                 defaults={'text': tweet.text,
                                                           'published': True,
@@ -100,7 +99,7 @@ class Command(BaseCommand):
         scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
-        scheduler.add_job(fetch_tweets, trigger=CronTrigger(hour='0'),
+        scheduler.add_job(fetch_tweets, trigger=CronTrigger(day='*/1'),
                           id="fetch_tweets", max_instances=1,
                           replace_existing=True)
         logger.info("Added job 'fetch_tweets'.")
