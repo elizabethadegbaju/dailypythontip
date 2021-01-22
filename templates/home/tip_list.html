@@ -4,12 +4,14 @@
     <div class="section">
         <div class="container">
             <div class="row">
-                <form class="col s12" action="{% url 'home:search-tips' %}"
+                <form class="col s12 hoverable" action=
+                        "{% url 'home:search-tips' %}"
                       method="get">
-                    <div class="row">
+                    <div class="row" style="margin-bottom: 0">
                         <div class="input-field inline col s10">
                             <i class="material-icons prefix">search</i>
-                            <input id="search" name="q" type="text">
+                            <input id="search" name="q" type="text"
+                                   class="white-text">
                             <label for="search">Search catalog of all
                                 tips posted by @python_tip</label>
                         </div>

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_apscheduler',
     'django.contrib.postgres',
     'el_pagination',
+    'django.contrib.humanize',
 ]
 
 SCHEDULER_CONFIG = {

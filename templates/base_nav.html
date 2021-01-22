@@ -28,8 +28,8 @@
         <nav>
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i
                     class="material-icons">menu</i></a>
-            <div class="nav-wrapper center-align">
-                <a class="page-title">Daily Python Tip</a>
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Daily Python Tip</a>
             </div>
         </nav>
     </header>
@@ -61,7 +61,8 @@
         <li><a class="waves-effect waves-yellow waves-ripple"
                href="{% url 'home:index' %}"><i class="material-icons">home</i>Home
         </a></li>
-        <li><a href="#!" class="waves-effect waves-yellow waves-ripple"><i
+        <li><a href="{% url 'home:retrieve-today' %}"
+               class="waves-effect waves-yellow waves-ripple"><i
                 class="material-icons">today</i>Tip of the day
         </a></li>
         <li class="no-padding">
@@ -99,10 +100,11 @@
 {% block footer %}
     <footer class="page-footer">
         <div class="footer-copyright">
-            <div>
-                © 2021 Daily Python Tip
-                <a class="grey-text text-lighten-4 "
-                   href="{% url 'home:index' %}">Browse</a>
+            <div class="container">
+                © 2021 Elizabeth Adegbaju
+                <a class="grey-text text-lighten-4 right"
+                   href="{% url 'home:retrieve-today' %}">Go to
+                    Tip of the Day</a>
             </div>
         </div>
     </footer>

@@ -1,0 +1,67 @@
+{% extends 'base_nav.html' %}
+{% load humanize %}
+{% block styles %}
+    {{ block.super }}
+    <style>
+        @-webkit-keyframes alertPulse {
+            0% {
+                background-color: #306998;
+                opacity: 1;
+            }
+            50% {
+                background-color: #222;
+                opacity: 0.75;
+            }
+            100% {
+                background-color: #306998;
+                opacity: 1;
+            }
+        }
+
+        .alertPulse {
+            animation: alertPulse 2s ease-out;
+            animation-iteration-count: infinite;
+            opacity: 1;
+            background: #306998;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="section">
+        <div class="row">
+            {% if not tip %}
+                <div class="grey-text container center-align">
+                    <h2>No Python Tip has been retrieved from @python_tip's
+                        twitter account today</h2>
+                </div>
+            {% else %}
+                <div class="grey-text container center-align">
+                    <h2>Python Tip posted {{ tip.timestamp|naturaltime }}</h2>
+                </div>
+                <div class="col s12 m6 offset-m3 l4 offset-l4"
+                     style="margin-top: 2%">
+                    <div class="card alertPulse">
+                        <div class="card-content white-text left-align">
+                <span class="card-title">{{ tip.author }}
+                <span class="right"><i class="material-icons">favorite</i>
+                    {{ tip.total_likes }} <i class="material-icons">cached</i>
+                    {{ tip.total_retweets }}
+                </span> </span>
+                            <p style="white-space: pre-wrap">{{ tip.text|safe|linebreaksbr }}</p>
+                        </div>
+                        {% if tip.has_link %}
+                            <div class="card-action center-align"
+                                 style="background-color: #306998">
+                                {% for tiplink in tip.tiplink_set.all %}
+                                    <a href="{{ tiplink.link|safe }}"
+                                       target="_blank"
+                                    >{{ tiplink.link|safe }}</a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

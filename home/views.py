@@ -2,8 +2,8 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, \
     SearchRank
 from django.db.models import F
 from django.shortcuts import render
+from django.utils.timezone import now
 
-# Create your views here.
 from home.models import Tip, Tag
 
 
@@ -64,3 +64,12 @@ def sort_tips(request, criteria, template='home/tip_list.html',
     return render(request, template,
                   {'tips': sorted_tips, 'page_template': page_template,
                    'tags': tags})
+
+
+def todays_tip(request):
+    latest_tip = Tip.objects.latest()
+    if latest_tip.timestamp.date() == now().date():
+        tip = latest_tip
+        return render(request, 'home/todays_tip.html', {'tip': tip})
+    else:
+        return render(request, 'home/todays_tip.html', {'tip': None})

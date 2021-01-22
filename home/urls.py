@@ -23,4 +23,5 @@ urlpatterns = [
     path('search/', views.search_tips, name='search-tips'),
     path('filter/<str:tag>/', views.filter_tag, name='filter-tag'),
     path('sort/<str:criteria>/', views.sort_tips, name='sort-tips'),
+    path('today/', views.todays_tip, name='retrieve-today'),
 ]
