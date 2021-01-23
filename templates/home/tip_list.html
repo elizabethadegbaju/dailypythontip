@@ -11,7 +11,8 @@
                         <div class="input-field inline col s10">
                             <i class="material-icons prefix">search</i>
                             <input id="search" name="q" type="text"
-                                   class="white-text">
+                                   class="white-text active"
+                                   value="{{ request.GET.q }}">
                             <label for="search">Search catalog of all
                                 tips posted by @python_tip</label>
                         </div>
@@ -49,6 +50,7 @@
 {% block scripts %}
     {{ block.super }}
     <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
-    <script>$.endlessPaginate({paginateOnScroll: true});
+    <script>
+        $.endlessPaginate({paginateOnScroll: true});
     </script>
 {% endblock %}

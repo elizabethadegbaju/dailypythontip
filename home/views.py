@@ -58,6 +58,8 @@ def sort_tips(request, criteria, template='home/tip_list.html',
         sorted_tips = tips.order_by('-total_likes')
     elif criteria == 'retweets':
         sorted_tips = tips.order_by('-total_retweets')
+    elif criteria == 'recent':
+        sorted_tips = tips.order_by('-timestamp')
     else:
         sorted_tips = tips
     tags = Tag.objects.all().order_by('name')
