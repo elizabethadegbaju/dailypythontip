@@ -2,6 +2,7 @@ import tweepy
 from decouple import config
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector, SearchQuery, \
     SearchRank, TrigramSimilarity
@@ -182,4 +183,24 @@ def link_twitter(request):
         messages.error(request, 'Error connecting to your twitter account.')
         print('Error! Failed to get access token.')
         print(tweepy.TweepError)
+    return redirect('home:index')
+
+
+@login_required
+def retweet(request, tweet_id):
+    consumer_key = config('CONSUMER_KEY')
+    consumer_secret = config('CONSUMER_SECRET')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    try:
+        access_token = request.user.twitteruser.access_token
+        access_token_secret = request.user.twitteruser.access_token_secret
+        auth.set_access_token(access_token, access_token_secret)
+        api = tweepy.API(auth, retry_count=6)
+
+        api.retweet(tweet_id)
+        messages.success(request, 'Python tip retweeted successfully!')
+    except tweepy.TweepError:
+        messages.error(request, 'Sorry, I was unable to retweet that Python '
+                                'Tip')
+        print('Error! Unable to retweet Python Tip.')
     return redirect('home:index')

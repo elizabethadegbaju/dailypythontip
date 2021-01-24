@@ -6,21 +6,26 @@
             <div class="card-content grey-text text-darken-2 left-align">
                 <span class="card-title">{{ tip.author }}
                 <span class="right"><i class="material-icons">favorite</i>
-                    {{ tip.total_likes }} <i class="material-icons">cached</i>
-                    {{ tip.total_retweets }}
+                    {{ tip.total_likes }} <a
+                            class="tooltipped grey-text text-darken-2"
+                            data-position="top"
+                            data-tooltip="Click to Retweet"
+                            href="{% url 'home:retweet' tip.tweet_id %}"> <i
+                            class="material-icons">cached</i>
+                        {{ tip.total_retweets }}</a>
                 </span> </span>
                 <p style="white-space: pre-wrap">{{ tip.text|safe|linebreaksbr }}</p>
             </div>
-            {% if tip.has_link %}
-                <div class="card-action center-align"
-                     style="background-color: #306998">
+            <div class="card-action center-align"
+                 style="background-color: #306998">
+                {% if tip.has_link %}
                     {% for tiplink in tip.tiplink_set.all %}
                         <a href="{{ tiplink.link|safe }}"
                            target="_blank"
                         >{{ tiplink.link|safe }}</a>
                     {% endfor %}
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 {% endfor %}
