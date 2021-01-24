@@ -1,6 +1,7 @@
 """
 Models for dailypythontip home app
 """
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -40,3 +41,12 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TwitterUser(models.Model):
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    access_token = models.TextField()
+    access_token_secret = models.TextField()
+
+    def __str__(self):
+        return self.user.username

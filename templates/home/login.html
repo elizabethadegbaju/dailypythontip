@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block styles %}
+    {{ block.super }}
+    <style>
+        body {
+            background-color: #306998;
+        }
+    </style>
+{% endblock %}
+{% block body_class %}
+{% endblock %}
+{% block content %}
+    <div class="section" style="height: 100vh">
+        <div class="row" style="margin-top: 100px">
+            <div class="col s12 m6 offset-m3 l4 offset-l4">
+                <form class="white-text" method="post"
+                      action="{% url 'home:login' %}">
+                    {% csrf_token %}
+                    <div class="row center-align">
+                        <a href="{% url 'home:index' %}" class="white-text">
+                            <h4>Daily Python Tip</h4></a>
+                        <hr style="width: 30%">
+                        <h6>Sign In</h6>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username"
+                                   type="text" class="validate white-text"
+                                   required>
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password"
+                                   type="password"
+                                   class="validate white-text" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row center-align">
+                        <div class="input-field col s12">
+                            <button class="waves-effect waves-light btn
+                            hoverable" type="submit">
+                                <i class="material-icons right">send</i>Sign In
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

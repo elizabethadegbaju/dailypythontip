@@ -46,14 +46,12 @@
                 {% if not user.is_authenticated %}
                     <p><span class="white-text name
                     text-darken-3">Welcome,
-                        Pythonista</span></p>
+                        Pythonista</span></p><br>
                 {% else %}
-                    <p><span
-                            class="white-text name">Welcome,
+                    <p><span class="white-text name">Welcome,
                         {{ user.get_full_name }}</span>
                     </p>
-                    <p href="#email"><span
-                            class="white-text email">
+                    <p><span class="white-text email">
                     {{ user.email }}</span></p>
                 {% endif %}
             </div>
@@ -98,6 +96,21 @@
         <li><a class="waves-effect waves-yellow waves-ripple"
                href="{% url 'home:sort-tips' 'recent' %}"><i
                 class="material-icons">history</i>Most Recent</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        {% if user.is_authenticated %}
+            <li><a class="waves-effect waves-yellow waves-ripple"
+                   href="{% url 'home:logout' %}"><i
+                    class="material-icons">logout</i>Sign Out</a></li>
+        {% else %}
+            <li><a class="waves-effect waves-yellow waves-ripple"
+                   href="{% url 'home:register' %}"><i
+                    class="material-icons">how_to_reg</i>Register</a></li>
+            <li><a class="waves-effect waves-yellow waves-ripple"
+                   href="{% url 'home:login' %}"><i
+                    class="material-icons">login</i>Sign In</a></li>
+        {% endif %}
     </ul>
 {% endblock %}
 {% block footer %}

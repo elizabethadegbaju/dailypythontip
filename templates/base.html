@@ -20,7 +20,7 @@
 
     {% endblock %}
 </head>
-<body class="grey darken-2">
+<body class="{% block body_class %}grey darken-2{% endblock %}">
 {% block header %}
 {% endblock %}
 
@@ -36,6 +36,17 @@
     <script src="{% static 'jquery/jquery-3.5.1.min.js' %}"></script>
     <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
+    <script>
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                M.toast({html: '{{ message }}', classes: 'red'});
+            {% elif message.tags == 'success' %}
+                M.toast({html: '{{ message }}', classes: 'green'});
+            {% elif message.tags == 'info' %}
+                M.toast({html: '{{ message }}'});
+            {% endif %}
+        {% endfor %}
+    </script>
 {% endblock %}
 </body>
 </html>
