@@ -47,7 +47,8 @@ def fetch_tweets():
 
     api = tweepy.API(auth, retry_count=6)
 
-    tweets = tweepy.Cursor(api.user_timeline, id='python_tip').items()
+    tweets = tweepy.Cursor(api.user_timeline, id='python_tip',
+                           tweet_mode='extended').items()
     for tweet in tweets:
         create_tip(tweet)
 
@@ -64,8 +65,12 @@ def create_tip(tweet):
                 name=hashtag['text'].lower())
             if created:
                 tag.save()
+    try:
+        text = tweet.retweeted_status.full_text
+    except AttributeError:
+        text = tweet.full_text
     tip, created = Tip.objects.update_or_create(tweet_id=tweet.id,
-                                                defaults={'text': tweet.text,
+                                                defaults={'text': text,
                                                           'published': True,
                                                           'author': tweet.author.screen_name,
                                                           'total_likes': str(
