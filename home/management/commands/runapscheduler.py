@@ -107,7 +107,7 @@ class Command(BaseCommand):
         scheduler = BackgroundScheduler(timezone=settings.TIME_ZONE)
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
-        scheduler.add_job(fetch_tweets, trigger=CronTrigger(day='*/1'),
+        scheduler.add_job(fetch_tweets, trigger=CronTrigger(hour='*/3'),
                           id="fetch_tweets", max_instances=1,
                           replace_existing=True)
         logger.info("Added job 'fetch_tweets'.")
