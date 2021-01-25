@@ -107,8 +107,8 @@ def log_in(request):
                 api.verify_credentials()
                 print("Authentication OK")
             except tweepy.TweepError:
-                messages.error(request, 'Error connecting to your Twitter '
-                                        'account')
+                messages.error(request,
+                               'Error connecting to your Twitter account')
                 print("Error during authentication")
             return redirect('home:index')
         else:
