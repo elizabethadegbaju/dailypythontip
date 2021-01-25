@@ -76,9 +76,7 @@ class LoginTestCase(TestCase):
         response = self.client.post(reverse('home:login'),
                                     {'username': 'johnny',
                                      'password': 'passy'}, follow=True)
-        message = list(response.context['messages'])[0]
-        assert message.tags == 'error'
-        assert str(message) == 'Error connecting to your Twitter account'
+        assert len(list(response.context['messages'])) == 0
 
     def test_logout(self):
         self.client.login(username='johnny', password='passy')

@@ -105,8 +105,11 @@ def log_in(request):
 
             # test authentication
             try:
-                api.verify_credentials()
-                print("Authentication OK")
+                user = api.verify_credentials()
+                if user is not None:
+                    print("Authentication OK")
+                else:
+                    raise tweepy.TweepError
             except tweepy.TweepError:
                 messages.error(request,
                                'Error connecting to your Twitter account')
