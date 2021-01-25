@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'el_pagination',
     'django.contrib.humanize',
+    'rest_framework',
 ]
 
 SCHEDULER_CONFIG = {
@@ -56,6 +57,13 @@ SCHEDULER_AUTOSTART = True
 
 EL_PAGINATION_PAGE_OUT_OF_RANGE_404 = True
 EL_PAGINATION_PER_PAGE = 12
+
+REST_FRAMEWORK = {
+    # Allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

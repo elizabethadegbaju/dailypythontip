@@ -9,6 +9,7 @@ coverage==5.3.1
 Django==3.1.5
 django-apscheduler==0.5.1
 django-el-pagination==3.3.0
+djangorestframework==3.12.2
 idna==2.10
 importlib-metadata==3.4.0
 iniconfig==1.1.1
