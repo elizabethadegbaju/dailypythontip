@@ -72,7 +72,10 @@ def create_tip(tweet):
     tip, created = Tip.objects.update_or_create(tweet_id=tweet.id,
                                                 defaults={'text': text,
                                                           'published': True,
-                                                          'author': tweet.author.screen_name,
+                                                          'author_name':
+                                                              tweet.author.screen_name,
+                                                          'author_email':
+                                                              'pythontip@example.com',
                                                           'total_likes': str(
                                                               tweet.favorite_count),
                                                           'total_retweets': str(

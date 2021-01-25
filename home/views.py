@@ -45,7 +45,8 @@ def search_tips(request, template='home/tip_list.html',
         template = page_template
     if 'q' in request.GET:
         query = request.GET['q']
-        vector = SearchVector('text') + SearchVector('author')
+        vector = SearchVector('text') + SearchVector(
+            'author_name') + SearchVector('author_email')
         tips = Tip.objects.annotate(
             rank=SearchRank(vector, SearchQuery(query)),
             similarity=TrigramSimilarity('text', query)).order_by('-rank')

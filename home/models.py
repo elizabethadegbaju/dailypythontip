@@ -13,13 +13,14 @@ class Tip(models.Model):
     timestamp = models.DateTimeField()
     text = models.TextField()
     has_link = models.BooleanField(default=False)
-    author = models.CharField(max_length=255)
+    author_name = models.CharField(max_length=255)
+    author_email = models.EmailField()
     published = models.BooleanField(default=False)
     total_likes = models.IntegerField()
     total_retweets = models.IntegerField()
 
     def __str__(self):
-        return f'{self.author} - {self.text[:150]}...'
+        return f'{self.author_name} - {self.text[:150]}...'
 
     class Meta:
         get_latest_by = 'timestamp'

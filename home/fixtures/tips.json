@@ -7,7 +7,8 @@
       "timestamp": "2021-01-22T18:35:10",
       "text": "Choosing the Python version / environment in @rstudio 1.4 settings \n\nhttps://t.co/4cbLWZT9oO",
       "has_link": true,
-      "author": "python_tip",
+      "author_name": "python_tip",
+      "author_email": "pythontip@example.com",
       "published": true,
       "total_likes": 2,
       "total_retweets": 2
@@ -21,7 +22,8 @@
       "timestamp": "2021-01-22T18:29:41",
       "text": "For people coming from #rstats:\n\n1) Do you miss dplyr? `siuba` is a Python port of dplyr with select, filter, mutate &amp; summarize over #pandas data frames.\n\nhttps://t.co/zBfeH6nEnQ\n\n2) RStudio 1.4 has new Python functions, incl. display of Python objects \n\nhttps://t.co/SgfVg64y4z https://t.co/tFpQID2cUE",
       "has_link": true,
-      "author": "python_tip",
+      "author_name": "python_tip",
+      "author_email": "pythontip@example.com",
       "published": true,
       "total_likes": 23,
       "total_retweets": 11
@@ -35,7 +37,8 @@
       "timestamp": "2021-01-22T11:36:08",
       "text": "Is your project too sophisticated for a simple Makefile? Find which Python-based, open source orchestration tool is best for you\n(#Airflow, #MLflow, #Dagster, #Prefect)\n\nhttps://t.co/yzhZBgv0lO\n\nhttps://t.co/Fz9MeSYusN",
       "has_link": true,
-      "author": "python_tip",
+      "author_name": "python_tip",
+      "author_email": "pythontip@example.com",
       "published": true,
       "total_likes": 20,
       "total_retweets": 11

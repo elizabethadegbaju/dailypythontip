@@ -14,7 +14,9 @@ class TipTestCase(TestCase):
                                       tweet_id=827622022461214722,
                                       text='This is not a real python tip. '
                                            'It is only for testing '
-                                           'purposes', author='python_tip',
+                                           'purposes',
+                                      author_name='python_tip',
+                                      author_email='pythontip@example.com',
                                       published=True, total_retweets=150,
                                       total_likes=500)
 
@@ -29,7 +31,8 @@ class TipTestCase(TestCase):
 
     def test_tip_object_parsing(self):
         """Tip object parses to string properly"""
-        assert str(self.tip) == f'{self.tip.author} - {self.tip.text[:150]}...'
+        assert str(
+            self.tip) == f'{self.tip.author_name} - {self.tip.text[:150]}...'
 
 
 class TagTestCase(TestCase):
@@ -48,7 +51,8 @@ class TipLinkTestCase(TestCase):
                                  tweet_id=827622022461214722,
                                  text='This is not a real python tip. '
                                       'It is only for testing '
-                                      'purposes', author='python_tip',
+                                      'purposes', author_name='python_tip',
+                                 author_email='pythontip@example.com',
                                  published=True, total_retweets=150,
                                  total_likes=500)
         self.tip_link = TipLink.objects.create(tip=tip,
