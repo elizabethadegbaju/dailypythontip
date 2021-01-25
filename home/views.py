@@ -7,10 +7,17 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.search import SearchVector, SearchQuery, \
     SearchRank, TrigramSimilarity
 from django.db.models import F
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.timezone import now
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 
 from home.models import Tip, Tag, TwitterUser
+from home.serializers import TipSerializer
 
 
 def index(request, template='home/tip_list.html',
@@ -208,3 +215,88 @@ def retweet(request, tweet_id):
                                 'Tip')
         print('Error! Unable to retweet Python Tip.')
     return redirect('home:index')
+
+
+@api_view(('GET', 'POST'))
+@renderer_classes((JSONRenderer,))
+@csrf_exempt
+def api_tip_list(request):
+    """
+    List all code tips, or create a new tip.
+    """
+    if request.method == 'GET':
+        tips = Tip.objects.all()
+        serializer = TipSerializer(tips, many=True)
+        return Response(data=serializer.data)
+
+    elif request.method == 'POST':
+        if request.user.is_authenticated:
+            data = JSONParser().parse(request)
+            if len(data['text']) > 140:
+                return Response(status=400, data={
+                    'error': 'This tip is too long. Max length is 140 '
+                             'characters.'})
+            data['timestamp'] = now()
+            serializer = TipSerializer(data=data)
+            if serializer.is_valid():
+                text = serializer.validated_data['text']
+                similar_tips = Tip.objects.annotate(
+                    similarity=TrigramSimilarity('text', text)).filter(
+                    similarity__gte=0.5)
+                if similar_tips.exists():
+                    return Response(status=400, data={
+                        'error': 'This tip is too similar to existing tips in the database'})
+                else:
+                    serializer.save()
+                    return Response(serializer.data, status=201)
+            return Response(serializer.errors, status=400)
+        else:
+            return Response(status=401, data={'error': 'login required'})
+
+
+@api_view(('GET', 'PUT', 'DELETE'))
+@csrf_exempt
+@renderer_classes((JSONRenderer,))
+def api_tip_detail(request, pk):
+    """
+    Retrieve, update or delete a python tip.
+    """
+    try:
+        tip = Tip.objects.get(pk=pk)
+    except Tip.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = TipSerializer(tip)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        if request.user.is_authenticated:
+            data = JSONParser().parse(request)
+            if len(data['text']) > 140:
+                return Response(status=400, data={
+                    'error': 'This tip is too long. Max length is 140 '
+                             'characters.'})
+            data['timestamp'] = now()
+            serializer = TipSerializer(tip, data=data)
+            if serializer.is_valid():
+                text = serializer.validated_data['text']
+                similar_tips = Tip.objects.annotate(
+                    similarity=TrigramSimilarity('text', text)).filter(
+                    similarity__gte=0.5)
+                if similar_tips.exists():
+                    return Response(status=400, data={
+                        'error': 'Updating this tip makes it too similar to existing tips in the database'})
+                else:
+                    serializer.save()
+                    return Response(serializer.data)
+            return Response(serializer.errors, status=400)
+        else:
+            return Response(status=401, data={'error': 'login required'})
+
+    elif request.method == 'DELETE':
+        if request.user.is_authenticated:
+            tip.delete()
+            return HttpResponse(status=204)
+        else:
+            return Response(status=401, data={'error': 'login required'})
