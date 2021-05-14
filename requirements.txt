@@ -6,9 +6,11 @@ certifi==2020.12.5
 chardet==4.0.0
 colorama==0.4.4
 coverage==5.3.1
+dj-database-url==0.5.0
 Django==3.1.8
 django-apscheduler==0.5.1
 django-el-pagination==3.3.0
+django-heroku==0.3.1
 djangorestframework==3.12.2
 idna==2.10
 importlib-metadata==3.4.0
@@ -35,4 +37,5 @@ tweepy==3.10.0
 typing-extensions==3.7.4.3
 tzlocal==2.1
 urllib3==1.26.4
+whitenoise==5.2.0
 zipp==3.4.0

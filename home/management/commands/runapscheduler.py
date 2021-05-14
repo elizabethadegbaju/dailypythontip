@@ -88,7 +88,6 @@ def create_tip(tweet):
             tip.has_link = True
             tip.save()
             links = retrieve_nested_url(tweet.entities['urls'])
-            print(links)
             for link in links:
                 tip_link = TipLink.objects.create(tip=tip, link=link)
                 tip_link.save()
