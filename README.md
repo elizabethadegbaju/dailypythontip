@@ -3,7 +3,7 @@
 ## Instructions
 - Run ```python manage.py runapscheduler``` to schedule the job that syncs
  the tweets to the database. The server must be running for the job to run
-  at 12 AM West African everyday. You can also go to the django admin
+  every three(3) hours. You can also go to the django admin
    platform to run the ```fetch_tweets``` job anytime you want
 ## Keys needed in ```.env``` file to be placed in root of directory
 - DATABASE_NAME ```string```
