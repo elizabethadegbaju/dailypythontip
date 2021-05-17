@@ -31,9 +31,9 @@ urlpatterns = [
     path('filter/<str:tag>/', views.filter_tag, name='filter-tag'),
     path('sort/<str:criteria>/', views.sort_tips, name='sort-tips'),
     path('today/', views.todays_tip, name='retrieve-today'),
-    path('register/', views.create_account, name='register'),
+    path('accounts/register/', views.create_account, name='register'),
     path('link_twitter/', views.link_twitter, name='link-twitter'),
-    path('login/', views.log_in, name='login'),
+    path('accounts/login/', views.log_in, name='login'),
     path('logout/', views.log_out, name='logout'),
     path('api/', include(apis)),
 ]
