@@ -6,9 +6,7 @@
   every three(3) hours. You can also go to the django admin
    platform to run the ```fetch_tweets``` job anytime you want
 ## Keys needed in ```.env``` file to be placed in root of directory
-- DATABASE_NAME ```string```
-- DATABASE_USER ```string```
-- DATABASE_PASSWORD ```string```
+- DATABASE_URL ```string```
 - SECRET_KEY ```string```
 - DEBUG ```boolean```
 - CONSUMER_KEY ```string```
